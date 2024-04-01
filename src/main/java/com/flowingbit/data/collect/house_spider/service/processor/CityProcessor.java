@@ -91,14 +91,14 @@ public class CityProcessor implements PageProcessor {
                 .run();
     }
 
-//    public static void main(String[] args){
-//        Spider.create(new CityProcessor())
-//                //从"https://www.lianjia.com/city/"开始抓
-//                .addUrl("https://www.lianjia.com/city/")
-//                //开启2个线程抓取
-//                .thread(1)
-//                //启动爬虫
-//                .run();
-//    }
+    public static void main(String[] args){
+        Spider.create(new CityProcessor())
+                //从"https://www.lianjia.com/city/"开始抓
+                .addUrl("https://www.lianjia.com/city/")
+                //开启2个线程抓取
+                .thread(1)
+                //启动爬虫
+                .run();
+    }
 
 }

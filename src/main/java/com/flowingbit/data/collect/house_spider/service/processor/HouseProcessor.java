@@ -61,7 +61,7 @@ public class HouseProcessor implements PageProcessor {
             if (!page.getHtml().xpath("//ul[@class='sellListContent']").match()) {
                 page.setSkip(true);
             } else{
-                int total = Integer.valueOf(page.getHtml().xpath("//div[@class='resultDes clear']/h2/span/text()").toString().strip());
+                int total = Integer.valueOf(page.getHtml().xpath("//div[@class='resultDes clear']/h2/span/text()").toString().trim());
                 int totalPage = total/30 + 1;
                 System.out.println("==================总页数：" + totalPage + "  当前页：" + count + "===================");
                 if((count<=totalPage) && (count<=100)){
@@ -93,20 +93,20 @@ public class HouseProcessor implements PageProcessor {
                             String watch = StringUtil.collectStringNumber(sl[0]);
                             //现在取消了带看次数
                             //String view = StringUtil.collectStringNumber(sl[1]);
-                            String releaseDate = sl[1].strip();
-                            String ss = StringUtils.strip(s.strip(), "|").strip();
+                            String releaseDate = sl[1].trim();
+                            String ss = StringUtils.strip(s.trim(), "|").trim();
                             String[] houseInfo = StringUtils.split(ss, "|");
-                            String roomCount = houseInfo[0].strip();
-                            Double houseArea = Double.valueOf(houseInfo[1].strip().split("平米")[0]);
-                            String towards = houseInfo[2].strip();
+                            String roomCount = houseInfo[0].trim();
+                            Double houseArea = Double.valueOf(houseInfo[1].trim().split("平米")[0]);
+                            String towards = houseInfo[2].trim();
                             String decoration = null;
                             String floor = null;
                             String houseAge = null;
                             house.setHouseAge(0);
                             try{
-                                decoration = houseInfo[3].strip();
-                                floor = houseInfo[4].strip();
-                                houseAge = StringUtils.strip(houseInfo[5].strip(), "年建");
+                                decoration = houseInfo[3].trim();
+                                floor = houseInfo[4].trim();
+                                houseAge = StringUtils.strip(houseInfo[5].trim(), "年建");
                                 if(houseAge!=null||houseAge.length()>0){
                                     if(StringUtils.isNumeric(houseAge)){
                                         house.setHouseAge(Integer.valueOf(houseAge));
@@ -193,16 +193,15 @@ public class HouseProcessor implements PageProcessor {
                 .run();
     }
 
+
     public static void main(String[] args){
+        Spider.create(new HouseProcessor())
+                //从"https://github.com/code4craft"开始抓
+                .addUrl("https://tj.lianjia.com/ershoufang/pg1")
+                //开启2个线程抓取
+                .thread(2)
+                //启动爬虫
+                .run();
     }
-//    public static void main(String[] args){
-//        Spider.create(new HouseProcessor())
-//                //从"https://github.com/code4craft"开始抓
-//                .addUrl("https://nj.lianjia.com/ershoufang/pg1")
-//                //开启2个线程抓取
-//                .thread(2)
-//                //启动爬虫
-//                .run();
-//    }
 
 }
