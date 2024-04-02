@@ -87,7 +87,7 @@ public class HouseProcessor implements PageProcessor {
                             String community = e.xpath("//div[@class='positionInfo']/a[1]/text()").toString();
                             String street = e.xpath("//div[@class='positionInfo']/a[2]/text()").toString();
                             String totolPrice = e.xpath("//div[@class='totalPrice']/span[1]/text()").toString();
-                            String averagePrice = StringUtils.strip(StringUtils.strip(e.xpath("//div[@class='unitPrice']/span[1]/text()").toString(), "单价"), "元/平米");
+                            String averagePrice = StringUtils.strip(StringUtils.strip(e.xpath("//div[@class='unitPrice']/span[1]/text()").toString(), "单价"), "元/平米").replaceAll(",","");
                             String followInfo = e.xpath("//div[@class='followInfo']/text()").toString();
                             String[] sl = followInfo.split("/");
                             String watch = StringUtil.collectStringNumber(sl[0]);
